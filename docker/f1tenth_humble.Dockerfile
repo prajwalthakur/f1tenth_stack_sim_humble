@@ -38,7 +38,7 @@ ENV ROS_DISTRO=humble
 
 # Cyclone DDS
 RUN apt-get update --fix-missing && \
-RUN apt-get install --no-install-recommends -y \
+apt-get install --no-install-recommends -y \
     ros-$ROS_DISTRO-cyclonedds \
     ros-$ROS_DISTRO-rmw-cyclonedds-cpp
 
@@ -51,8 +51,7 @@ RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /root/.bashrc
 RUN pip3 install -U colcon-common-extensions \
     && apt-get install -y build-essential python3-rosdep
 
-RUN \ 
-    pip3 install --no-cache-dir Cython
+RUN pip3 install --no-cache-dir Cython
 
 RUN git clone https://github.com/f1tenth/range_libc.git
 RUN cd ./range_libc/pywrapper &&  python3 setup.py install
