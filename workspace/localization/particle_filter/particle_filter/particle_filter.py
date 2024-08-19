@@ -93,7 +93,7 @@ class ParticleFiler(Node):
         self.INV_SQUASH_FACTOR    = 1.0 / self.get_parameter('squash_factor').value
         self.MAX_RANGE_METERS     = self.get_parameter('max_range').value
         self.THETA_DISCRETIZATION = self.get_parameter('theta_discretization').value
-        self.WHICH_RM             = "glt" #self.get_parameter('range_method').value
+        self.WHICH_RM             = "rm" #self.get_parameter('range_method').value
         self.RANGELIB_VAR         = self.get_parameter('rangelib_variant').value
         self.SHOW_FINE_TIMING     = self.get_parameter('fine_timing').value
         self.PUBLISH_ODOM         = self.get_parameter('publish_odom').value
