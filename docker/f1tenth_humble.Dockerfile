@@ -37,7 +37,7 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata
 ENV ROS_DISTRO=humble
 
 # Cyclone DDS
-RUN apt-get update --fix-missing && \
+RUN apt-get update --fix-missing 
 RUN apt-get install --no-install-recommends -y \
     ros-$ROS_DISTRO-cyclonedds \
     ros-$ROS_DISTRO-rmw-cyclonedds-cpp

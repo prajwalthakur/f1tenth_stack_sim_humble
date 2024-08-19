@@ -24,9 +24,9 @@ shift "$(($OPTIND -1))"
 if [ "$mode" == "gpu" ]; then
     run_docker --runtime=nvidia \
     -v $absolute_path/workspace/:/root/workspace/src \
-    f1tenth_humble:sim bash
+    f1tenth_humble:particle bash
 else
     run_docker \
     -v $absolute_path/workspace/:/root/workspace/src \
-    f1tenth_humble:sim bash
+    f1tenth_humble:particle bash
 fi
