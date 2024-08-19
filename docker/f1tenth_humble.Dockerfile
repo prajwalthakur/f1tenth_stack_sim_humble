@@ -12,12 +12,15 @@ ENV NVIDIA_VISIBLE_DEVICES \
 ENV NVIDIA_DRIVER_CAPABILITIES \
     ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
-    
+
 RUN apt-get install --no-install-recommends -y \
     software-properties-common \
     vim \
-    python3-pip
+    python3-pip \
+    ros-humble-rviz2
 
+
+RUN apt-get -y dist-upgrade
 # Added updated mesa drivers for integration with cpu - https://github.com/ros2/rviz/issues/948#issuecomment-1428979499
 RUN add-apt-repository ppa:kisak/kisak-mesa && \
     apt-get update && apt-get upgrade -y
@@ -34,6 +37,7 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata
 ENV ROS_DISTRO=humble
 
 # Cyclone DDS
+RUN apt-get update --fix-missing && \
 RUN apt-get install --no-install-recommends -y \
     ros-$ROS_DISTRO-cyclonedds \
     ros-$ROS_DISTRO-rmw-cyclonedds-cpp
@@ -47,16 +51,25 @@ RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /root/.bashrc
 RUN pip3 install -U colcon-common-extensions \
     && apt-get install -y build-essential python3-rosdep
 
+RUN \ 
+    pip3 install --no-cache-dir Cython
+
+RUN git clone https://github.com/f1tenth/range_libc.git
+RUN cd ./range_libc/pywrapper &&  python3 setup.py install
+
+
+RUN git clone https://github.com/f1tenth/f1tenth_gym
+RUN cd f1tenth_gym && \
+    pip3 install -e .
+
+
+
 ENV WORKSPACE_PATH=/root/workspace
 
 COPY workspace/ $WORKSPACE_PATH/src/
 
 SHELL ["/bin/bash", "-c"]
 
-RUN \ 
-    pip3 install --no-cache-dir Cython
-RUN git clone https://github.com/f1tenth/range_libc.git
-RUN cd ./range_libc/pywrapper &&  python3 setup.py install
 
 RUN rosdep update && cd $WORKSPACE_PATH && \
     rosdep install --from-paths src -y --ignore-src
