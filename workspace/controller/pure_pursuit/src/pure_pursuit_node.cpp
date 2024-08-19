@@ -33,7 +33,7 @@ class PurePursuit : public rclcpp::Node {
 public:
     PurePursuit() : Node("pure_pursuit_node") {
         // initialise parameters
-        this->declare_parameter("waypoints_path", "/sim_ws/src/pure_pursuit/racelines/e7_floor5.csv");
+        this->declare_parameter("waypoints_path", "/root/workspace/src/controller/pure_pursuit/racelines/competition_racing_2.csv");
         this->declare_parameter("odom_topic", "/ego_racecar/odom");
         this->declare_parameter("car_refFrame", "ego_racecar/base_link");
         this->declare_parameter("drive_topic", "/drive");
