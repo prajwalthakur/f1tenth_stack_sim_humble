@@ -4,7 +4,7 @@
 - from root of directory:
     - image build command : ./scripts/build/f1tenth.sh
     - run the container : ./scripts/build/devel.sh
-    - if need to open multiple terminal in already running container do : docker exec -it <name_of_container>
+    - if need to open multiple terminal in already running container do : docker exec -it <name_of_container> bash
 
 - In one terminal run : ros2 launch f1tenth_gym_ros gym_bridge_launch.py
 - In other terminal run : ros2 launch pure_pursuit sim_pure_pursuit_launch.py
